@@ -24,8 +24,8 @@ const ENEMY_MISSILE_DY = 5
 const UFO_POINTS = [10, 10, 50, 10, 10, 50, 10, 10, 300, 10, 10, 50, 10, 10]
 const HI_SCORE_FN = "user://data.txt"
 
-var Missile = load("res://Missile.tscn")
-var Bunker8 = load("res://Bunker8.tscn")
+var Missile = load("res://missile.tscn")
+var Bunker8 = load("res://bunker_8.tscn")
 var Enemy1 = load("res://Enemy1.tscn")
 var EnemyMissile = load("res://EnemyMissile.tscn")
 var Explosion = load("res://Explosion.tscn")
@@ -65,9 +65,19 @@ var move_fighter = 0			# 自機移動方向、0 | KEY_LEFT | KEY_RIGHT
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("KEY_LEFT = ", KEY_LEFT)
-	print("KEY_RIGHT = ", KEY_RIGHT)
+	#print("KEY_LEFT = ", KEY_LEFT)
+	#print("KEY_RIGHT = ", KEY_RIGHT)
+	setup_bunkers()
 	pass # Replace with function body.
+func setup_bunkers():
+	for ix in range(bunkers.size()):
+		bunkers[ix].queue_free()
+	bunkers = []
+	for x in range(4):
+		var bkr = Bunker8.instantiate()
+		bkr.position = Vector2((x+1)*100, 580)
+		add_child(bkr)
+		bunkers.push_back(bkr)
 func fireMissile():     # 自機ミサイル発射
 	if missile == null:
 		UFOPntIX += 1
