@@ -150,3 +150,8 @@ offset_right = 464.0
 offset_bottom = 784.0
 texture_normal = ExtResource("7_qg3xw")
 texture_pressed = ExtResource("8_a56ai")
+
+[connection signal="button_down" from="CanvasLayer/LeftButton" to="." method="_on_left_button_button_down"]
+[connection signal="button_up" from="CanvasLayer/LeftButton" to="." method="_on_left_button_button_up"]
+[connection signal="button_down" from="CanvasLayer/RightButton" to="." method="_on_right_button_button_down"]
+[connection signal="button_up" from="CanvasLayer/RightButton" to="." method="_on_right_button_button_up"]

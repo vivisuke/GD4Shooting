@@ -35,3 +35,13 @@ func _input(event):
 		else:
 			print("relesed")
 			move_fighter = 0
+
+
+func _on_left_button_button_down():
+	move_fighter = KEY_LEFT
+func _on_left_button_button_up():
+	move_fighter = 0
+func _on_right_button_button_down():
+	move_fighter = KEY_RIGHT
+func _on_right_button_button_up():
+	move_fighter = 0
