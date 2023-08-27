@@ -79,6 +79,36 @@ func fireMissile():     # 自機ミサイル発射
 		#bullet.position.x += 6
 		add_child(missile)
 		##$AudioMissile.play()
+func processMissile():              # 自機ミサイル処理
+	if missile != null:
+		if missile.position.y < 0:  # 画面上部に出た場合
+			missile.queue_free()
+			missile = null
+		else:
+			var bc = missile.move_and_collide(mv)
+			#print(bc)
+			##if bc != null:      # 敵機に当たった場合
+			##	missile.queue_free()
+			##	missile = null
+			##	if bc.collider == $UFO:         # UFO に当たった場合
+			##		$UFOLabel.rect_position.x = $UFO.position.x
+			##		$UFOLabel.text = "%d" % UFO_POINTS[UFOPntIX]
+			##		$UFOLabel/Timer.start()
+			##		$UFO.position.x = -1
+			##		#print("UFO")
+			##		score += UFO_POINTS[UFOPntIX]
+			##		updateScoreLabel()
+			##	else:
+			##		remove_enemy(bc.collider)   # 撃墜した敵機を削除, score更新
+			##		bc.collider.queue_free()
+			##	$AudioMissile.stop()        # ミサイル発射音停止
+			##	$AudioExplosion.play()      # 爆発音
+			##	updateScoreLabel()
+			##	if nEnemies == 0:       # 敵をすべて撃破した場合
+			##		paused = true
+			##		$NextLevel.show()
+			##		#level += 1
+			##		#setup_enemies()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -91,6 +121,8 @@ func _physics_process(delta):
 	elif move_fighter == KEY_RIGHT:
 		$Fighter.position.x += delta * FIGHTER_MOVE_UNIT
 		$Fighter.position.x = min(MAX_FIGHTER_X, $Fighter.position.x)
+	if missile != null:     # 自機ミサイル飛翔中
+		processMissile()
 	pass
 
 func _input(event):
