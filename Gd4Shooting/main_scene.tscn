@@ -155,3 +155,4 @@ texture_pressed = ExtResource("8_a56ai")
 [connection signal="button_up" from="CanvasLayer/LeftButton" to="." method="_on_left_button_button_up"]
 [connection signal="button_down" from="CanvasLayer/RightButton" to="." method="_on_right_button_button_down"]
 [connection signal="button_up" from="CanvasLayer/RightButton" to="." method="_on_right_button_button_up"]
+[connection signal="button_down" from="CanvasLayer/FireButton" to="." method="_on_fire_button_button_down"]

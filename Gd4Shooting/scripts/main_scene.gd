@@ -68,6 +68,17 @@ func _ready():
 	print("KEY_LEFT = ", KEY_LEFT)
 	print("KEY_RIGHT = ", KEY_RIGHT)
 	pass # Replace with function body.
+func fireMissile():     # 自機ミサイル発射
+	if missile == null:
+		UFOPntIX += 1
+		if UFOPntIX == UFO_POINTS.size():
+			UFOPntIX = 0
+		missile = Missile.instantiate()
+		missile.position = $Fighter.position
+		#print(missile.position)
+		#bullet.position.x += 6
+		add_child(missile)
+		##$AudioMissile.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -108,3 +119,7 @@ func _on_right_button_button_down():
 	move_fighter = KEY_RIGHT
 func _on_right_button_button_up():
 	move_fighter = 0
+
+
+func _on_fire_button_button_down():
+	fireMissile()       # 自機ミサイル発射
