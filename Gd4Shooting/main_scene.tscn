@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://swmccl33px8h"]
+[gd_scene load_steps=4 format=3 uid="uid://swmccl33px8h"]
 
 [ext_resource type="Texture2D" uid="uid://grftf0fkt3gk" path="res://images/frame.png" id="1_blcxp"]
 [ext_resource type="Texture2D" uid="uid://coqquwd0ha2qh" path="res://images/title.png" id="2_hmrqn"]
+[ext_resource type="FontFile" uid="uid://478bnoav4k7" path="res://fonts/PixelMplus12-Regular.ttf" id="3_yeb5j"]
 
 [node name="MainScene" type="Node2D"]
 
@@ -31,3 +32,40 @@ offset_right = 215.0
 offset_bottom = 91.0
 text = "ver 0.001"
 horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 285.0
+offset_top = 15.0
+offset_right = 381.0
+offset_bottom = 54.0
+theme_override_fonts/font = ExtResource("3_yeb5j")
+theme_override_font_sizes/font_size = 32
+text = "SCORE:"
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+offset_left = 381.0
+offset_top = 15.0
+offset_right = 477.0
+offset_bottom = 54.0
+theme_override_fonts/font = ExtResource("3_yeb5j")
+theme_override_font_sizes/font_size = 32
+text = "00000"
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+offset_left = 285.0
+offset_top = 54.0
+offset_right = 381.0
+offset_bottom = 93.0
+theme_override_fonts/font = ExtResource("3_yeb5j")
+theme_override_font_sizes/font_size = 32
+text = "HI:"
+horizontal_alignment = 2
+
+[node name="HiScore" type="Label" parent="CanvasLayer"]
+offset_left = 381.0
+offset_top = 54.0
+offset_right = 477.0
+offset_bottom = 93.0
+theme_override_fonts/font = ExtResource("3_yeb5j")
+theme_override_font_sizes/font_size = 32
+text = "00000"
