@@ -26,7 +26,7 @@ const HI_SCORE_FN = "user://data.txt"
 
 var Missile = load("res://missile.tscn")
 var Bunker8 = load("res://bunker_8.tscn")
-var Enemy1 = load("res://Enemy1.tscn")
+var Enemy1 = load("res://enemy_1.tscn")
 var EnemyMissile = load("res://EnemyMissile.tscn")
 var Explosion = load("res://Explosion.tscn")
 
@@ -67,8 +67,28 @@ var move_fighter = 0			# 自機移動方向、0 | KEY_LEFT | KEY_RIGHT
 func _ready():
 	#print("KEY_LEFT = ", KEY_LEFT)
 	#print("KEY_RIGHT = ", KEY_RIGHT)
+	setup_enemies()
 	setup_bunkers()
 	pass # Replace with function body.
+func setup_enemies():
+	print("level = ", level)
+	$UFO.position.x = -1        # UFO を画面外に移動
+	nEnemies = ENEMY_N_HORZ * ENEMY_N_VERT      # 初期敵機数
+	enemies.resize(ENEMY_N_HORZ * ENEMY_N_VERT)     # 敵機配列をリサイズ
+	for y in range(ENEMY_N_VERT):   # 
+		# 敵機 y 座標
+		var py = (ENEMY_N_VERT - 1 - y + min(level, 4)) * ENEMY_V_PITCH + ENEMY_Y0
+		for x in range(ENEMY_N_HORZ):
+			var px = x * ENEMY_H_PITCH + ENEMY_X0   # 敵機 x 座標
+			var enemy = Enemy1.instantiate()           # 敵機インスタンス作成
+			enemy.position = Vector2(px, py)        # 敵機位置設定
+			enemy.get_node("Sprite2D").frame = y & 0x1e   # 敵機画像設定
+			add_child(enemy)                        # 敵機ノードを画面に追加
+			var ix : int = x+y*ENEMY_N_HORZ;        # ix: 敵機通し番号
+			enemies[ix] = enemy                     # 敵機ノードを配列で管理
+			enemy.set("aryix", ix)      # 敵機ノードプロパティに通し番号追加
+			#print(enemy.get("aryix"))
+			#print(enemies[ix].get("aryix"))
 func setup_bunkers():
 	for ix in range(bunkers.size()):
 		bunkers[ix].queue_free()
