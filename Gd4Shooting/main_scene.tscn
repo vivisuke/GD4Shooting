@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://swmccl33px8h"]
+[gd_scene load_steps=3 format=3 uid="uid://swmccl33px8h"]
 
 [ext_resource type="Texture2D" uid="uid://grftf0fkt3gk" path="res://images/frame.png" id="1_blcxp"]
+[ext_resource type="Texture2D" uid="uid://coqquwd0ha2qh" path="res://images/title.png" id="2_hmrqn"]
 
 [node name="MainScene" type="Node2D"]
 
@@ -15,3 +16,18 @@ color = Color(0, 0, 0, 1)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_blcxp")
+
+[node name="Title" type="TextureRect" parent="CanvasLayer"]
+offset_left = 55.0
+offset_top = 5.0
+offset_right = 215.0
+offset_bottom = 77.0
+texture = ExtResource("2_hmrqn")
+
+[node name="VersionLabel" type="Label" parent="CanvasLayer"]
+offset_left = 55.0
+offset_top = 65.0
+offset_right = 215.0
+offset_bottom = 91.0
+text = "ver 0.001"
+horizontal_alignment = 1
