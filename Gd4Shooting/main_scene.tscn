@@ -1,5 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://swmccl33px8h"]
+[gd_scene load_steps=14 format=3 uid="uid://swmccl33px8h"]
 
+[ext_resource type="Texture2D" uid="uid://drgxckcu0gy70" path="res://images/ufo.png" id="1_3lpbb"]
+[ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_af567"]
 [ext_resource type="Texture2D" uid="uid://grftf0fkt3gk" path="res://images/frame.png" id="1_blcxp"]
 [ext_resource type="Texture2D" uid="uid://coqquwd0ha2qh" path="res://images/title.png" id="2_hmrqn"]
 [ext_resource type="FontFile" uid="uid://478bnoav4k7" path="res://fonts/PixelMplus12-Regular.ttf" id="3_yeb5j"]
@@ -11,12 +13,31 @@
 [ext_resource type="Texture2D" uid="uid://bw0gtcccg51s6" path="res://images/btn2_pressed.png" id="8_a56ai"]
 [ext_resource type="Texture2D" uid="uid://cpn3fnhc8le8h" path="res://images/right_pressed.png" id="8_gvjdy"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_61dx6"]
+size = Vector2(64, 32)
+
 [node name="MainScene" type="Node2D"]
+script = ExtResource("1_af567")
 
 [node name="BG" type="ColorRect" parent="."]
 offset_right = 500.0
 offset_bottom = 800.0
 color = Color(0, 0, 0, 1)
+
+[node name="UFO" type="CharacterBody2D" parent="."]
+position = Vector2(250, 140)
+
+[node name="Sprite2D" type="Sprite2D" parent="UFO"]
+texture = ExtResource("1_3lpbb")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UFO"]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_61dx6")
+
+[node name="Timer" type="Timer" parent="UFO"]
+wait_time = 10.0
+autostart = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
