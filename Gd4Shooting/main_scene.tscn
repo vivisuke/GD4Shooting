@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://swmccl33px8h"]
+[gd_scene load_steps=11 format=3 uid="uid://swmccl33px8h"]
 
 [ext_resource type="Texture2D" uid="uid://grftf0fkt3gk" path="res://images/frame.png" id="1_blcxp"]
 [ext_resource type="Texture2D" uid="uid://coqquwd0ha2qh" path="res://images/title.png" id="2_hmrqn"]
@@ -6,7 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://bp7q577oy44lu" path="res://images/player1.png" id="4_fen7f"]
 [ext_resource type="Texture2D" uid="uid://dja0yheg5otm5" path="res://images/left.png" id="5_s2j44"]
 [ext_resource type="Texture2D" uid="uid://dadui7g6ecdnv" path="res://images/right.png" id="6_iqbs6"]
+[ext_resource type="Texture2D" uid="uid://d4fkhab8pxn82" path="res://images/left_pressed.png" id="6_jlknt"]
 [ext_resource type="Texture2D" uid="uid://cwxsmdsu17kyh" path="res://images/btn2.png" id="7_qg3xw"]
+[ext_resource type="Texture2D" uid="uid://bw0gtcccg51s6" path="res://images/btn2_pressed.png" id="8_a56ai"]
+[ext_resource type="Texture2D" uid="uid://cpn3fnhc8le8h" path="res://images/right_pressed.png" id="8_gvjdy"]
 
 [node name="MainScene" type="Node2D"]
 
@@ -97,6 +100,7 @@ offset_top = 720.0
 offset_right = 84.0
 offset_bottom = 784.0
 texture_normal = ExtResource("5_s2j44")
+texture_pressed = ExtResource("6_jlknt")
 
 [node name="RightButton" type="TextureButton" parent="CanvasLayer"]
 offset_left = 100.0
@@ -104,6 +108,7 @@ offset_top = 720.0
 offset_right = 164.0
 offset_bottom = 784.0
 texture_normal = ExtResource("6_iqbs6")
+texture_pressed = ExtResource("8_gvjdy")
 
 [node name="FireButton" type="TextureButton" parent="CanvasLayer"]
 offset_left = 400.0
@@ -111,3 +116,4 @@ offset_top = 720.0
 offset_right = 464.0
 offset_bottom = 784.0
 texture_normal = ExtResource("7_qg3xw")
+texture_pressed = ExtResource("8_a56ai")
