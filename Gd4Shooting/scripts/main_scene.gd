@@ -13,6 +13,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	pass
+func _physics_process(delta):
 	if move_fighter == KEY_LEFT:
 		$Fighter.position.x -= delta * FIGHTER_LR_SPEED
 	elif move_fighter == KEY_RIGHT:
