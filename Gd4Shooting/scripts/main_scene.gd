@@ -138,6 +138,8 @@ func _input(event):
 			#	$Fighter.position.x -= 10
 			#elif kc == KEY_RIGHT:
 			#	$Fighter.position.x += 10
+			if kc == KEY_SPACE:
+				fireMissile()       # 自機ミサイル発射
 		else:
 			print("relesed")
 			move_fighter = 0
