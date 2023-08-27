@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://swmccl33px8h"]
+[gd_scene load_steps=8 format=3 uid="uid://swmccl33px8h"]
 
 [ext_resource type="Texture2D" uid="uid://grftf0fkt3gk" path="res://images/frame.png" id="1_blcxp"]
 [ext_resource type="Texture2D" uid="uid://coqquwd0ha2qh" path="res://images/title.png" id="2_hmrqn"]
 [ext_resource type="FontFile" uid="uid://478bnoav4k7" path="res://fonts/PixelMplus12-Regular.ttf" id="3_yeb5j"]
 [ext_resource type="Texture2D" uid="uid://bp7q577oy44lu" path="res://images/player1.png" id="4_fen7f"]
+[ext_resource type="Texture2D" uid="uid://dja0yheg5otm5" path="res://images/left.png" id="5_s2j44"]
+[ext_resource type="Texture2D" uid="uid://dadui7g6ecdnv" path="res://images/right.png" id="6_iqbs6"]
+[ext_resource type="Texture2D" uid="uid://cwxsmdsu17kyh" path="res://images/btn2.png" id="7_qg3xw"]
 
 [node name="MainScene" type="Node2D"]
 
@@ -87,3 +90,24 @@ texture = ExtResource("4_fen7f")
 [node name="ReserveFighter2" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(165, 680)
 texture = ExtResource("4_fen7f")
+
+[node name="LeftButton" type="TextureButton" parent="CanvasLayer"]
+offset_left = 20.0
+offset_top = 720.0
+offset_right = 84.0
+offset_bottom = 784.0
+texture_normal = ExtResource("5_s2j44")
+
+[node name="RightButton" type="TextureButton" parent="CanvasLayer"]
+offset_left = 100.0
+offset_top = 720.0
+offset_right = 164.0
+offset_bottom = 784.0
+texture_normal = ExtResource("6_iqbs6")
+
+[node name="FireButton" type="TextureButton" parent="CanvasLayer"]
+offset_left = 400.0
+offset_top = 720.0
+offset_right = 464.0
+offset_bottom = 784.0
+texture_normal = ExtResource("7_qg3xw")
