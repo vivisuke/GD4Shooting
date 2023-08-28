@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu65l8agwr24g"]
+
+[ext_resource type="Texture2D" uid="uid://cl3belfpvi7pw" path="res://images/white4x4.png" id="1_u4uqj"]
+
+[node name="Explosion" type="CPUParticles2D"]
+emitting = false
+amount = 100
+lifetime = 4.0
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("1_u4uqj")
+emission_shape = 1
+emission_sphere_radius = 10.0
+spread = 180.0
+gravity = Vector2(0, 98)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angle_min = 120.0
+angle_max = 240.0

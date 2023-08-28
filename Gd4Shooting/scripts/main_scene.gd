@@ -28,7 +28,7 @@ var Missile = load("res://missile.tscn")
 var Bunker8 = load("res://bunker_8.tscn")
 var Enemy1 = load("res://enemy_1.tscn")
 var EnemyMissile = load("res://enemy_missile.tscn")
-var Explosion = load("res://Explosion.tscn")
+var Explosion = load("res://explosion.tscn")
 
 var gameOver = false
 var paused = false
@@ -103,12 +103,13 @@ func fireEnemyMissile():
 		return
 	var r = randi() % nEnemies      # ミサイルを発射する敵
 	var ix = 0
-	while true:
+	while ix < enemies.size():
 		while enemies[ix] == null:  # 空要素はスキップ
 			ix += 1
 		if r == 0:
 			break
 		ix += 1
+		if ix == enemies.size(): ix = 0
 		r -= 1
 	if enemies[ix] != null:
 		var em = EnemyMissile.instantiate()
@@ -120,9 +121,9 @@ func fireEnemyMissile():
 		enemyMissiles.push_back(em)
 	pass
 func updateLeftFighter():
-	$FrameLayer/nFighter.text = "%d" % nFighter
-	$FrameLayer/Sprite1.set_visible(nFighter>1)
-	$FrameLayer/Sprite2.set_visible(nFighter>2)
+	$FrameLayer/NFighter.text = "%d" % nFighter
+	$FrameLayer/ReserveFighter1.set_visible(nFighter>1)
+	$FrameLayer/ReserveFighter2.set_visible(nFighter>2)
 func clearAllMissiles():
 	for em in enemyMissiles:
 		if em != null:

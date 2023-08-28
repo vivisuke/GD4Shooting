@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://swmccl33px8h"]
+[gd_scene load_steps=16 format=3 uid="uid://swmccl33px8h"]
 
 [ext_resource type="Texture2D" uid="uid://drgxckcu0gy70" path="res://images/ufo.png" id="1_3lpbb"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_af567"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://coqquwd0ha2qh" path="res://images/title.png" id="2_hmrqn"]
 [ext_resource type="FontFile" uid="uid://478bnoav4k7" path="res://fonts/PixelMplus12-Regular.ttf" id="3_yeb5j"]
 [ext_resource type="Texture2D" uid="uid://bp7q577oy44lu" path="res://images/player1.png" id="4_fen7f"]
+[ext_resource type="PackedScene" uid="uid://cu65l8agwr24g" path="res://explosion.tscn" id="4_q7k30"]
 [ext_resource type="Texture2D" uid="uid://dja0yheg5otm5" path="res://images/left.png" id="5_s2j44"]
 [ext_resource type="Texture2D" uid="uid://dadui7g6ecdnv" path="res://images/right.png" id="6_iqbs6"]
 [ext_resource type="Texture2D" uid="uid://d4fkhab8pxn82" path="res://images/left_pressed.png" id="6_jlknt"]
@@ -51,21 +52,24 @@ texture = ExtResource("4_fen7f")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fighter"]
 shape = SubResource("RectangleShape2D_wqehj")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Explosion" parent="Fighter" instance=ExtResource("4_q7k30")]
+position = Vector2(-250, -620)
 
-[node name="FrameRect" type="TextureRect" parent="CanvasLayer"]
+[node name="FrameLayer" type="CanvasLayer" parent="."]
+
+[node name="FrameRect" type="TextureRect" parent="FrameLayer"]
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_blcxp")
 
-[node name="Title" type="TextureRect" parent="CanvasLayer"]
+[node name="Title" type="TextureRect" parent="FrameLayer"]
 offset_left = 55.0
 offset_top = 5.0
 offset_right = 215.0
 offset_bottom = 77.0
 texture = ExtResource("2_hmrqn")
 
-[node name="VersionLabel" type="Label" parent="CanvasLayer"]
+[node name="VersionLabel" type="Label" parent="FrameLayer"]
 offset_left = 55.0
 offset_top = 65.0
 offset_right = 215.0
@@ -73,7 +77,7 @@ offset_bottom = 91.0
 text = "ver 0.001"
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="Label" type="Label" parent="FrameLayer"]
 offset_left = 285.0
 offset_top = 15.0
 offset_right = 381.0
@@ -82,7 +86,7 @@ theme_override_fonts/font = ExtResource("3_yeb5j")
 theme_override_font_sizes/font_size = 32
 text = "SCORE:"
 
-[node name="Score" type="Label" parent="CanvasLayer"]
+[node name="Score" type="Label" parent="FrameLayer"]
 offset_left = 381.0
 offset_top = 15.0
 offset_right = 477.0
@@ -91,7 +95,7 @@ theme_override_fonts/font = ExtResource("3_yeb5j")
 theme_override_font_sizes/font_size = 32
 text = "00000"
 
-[node name="Label2" type="Label" parent="CanvasLayer"]
+[node name="Label2" type="Label" parent="FrameLayer"]
 offset_left = 285.0
 offset_top = 54.0
 offset_right = 381.0
@@ -101,7 +105,7 @@ theme_override_font_sizes/font_size = 32
 text = "HI:"
 horizontal_alignment = 2
 
-[node name="HiScore" type="Label" parent="CanvasLayer"]
+[node name="HiScore" type="Label" parent="FrameLayer"]
 offset_left = 381.0
 offset_top = 54.0
 offset_right = 477.0
@@ -110,7 +114,7 @@ theme_override_fonts/font = ExtResource("3_yeb5j")
 theme_override_font_sizes/font_size = 32
 text = "00000"
 
-[node name="NFighter" type="Label" parent="CanvasLayer"]
+[node name="NFighter" type="Label" parent="FrameLayer"]
 offset_left = 40.0
 offset_top = 660.0
 offset_right = 64.0
@@ -119,15 +123,15 @@ theme_override_fonts/font = ExtResource("3_yeb5j")
 theme_override_font_sizes/font_size = 32
 text = "3"
 
-[node name="ReserveFighter1" type="Sprite2D" parent="CanvasLayer"]
+[node name="ReserveFighter1" type="Sprite2D" parent="FrameLayer"]
 position = Vector2(100, 680)
 texture = ExtResource("4_fen7f")
 
-[node name="ReserveFighter2" type="Sprite2D" parent="CanvasLayer"]
+[node name="ReserveFighter2" type="Sprite2D" parent="FrameLayer"]
 position = Vector2(165, 680)
 texture = ExtResource("4_fen7f")
 
-[node name="LeftButton" type="TextureButton" parent="CanvasLayer"]
+[node name="LeftButton" type="TextureButton" parent="FrameLayer"]
 offset_left = 320.0
 offset_top = 720.0
 offset_right = 384.0
@@ -135,7 +139,7 @@ offset_bottom = 784.0
 texture_normal = ExtResource("5_s2j44")
 texture_pressed = ExtResource("6_jlknt")
 
-[node name="RightButton" type="TextureButton" parent="CanvasLayer"]
+[node name="RightButton" type="TextureButton" parent="FrameLayer"]
 offset_left = 400.0
 offset_top = 720.0
 offset_right = 464.0
@@ -143,7 +147,7 @@ offset_bottom = 784.0
 texture_normal = ExtResource("6_iqbs6")
 texture_pressed = ExtResource("8_gvjdy")
 
-[node name="FireButton" type="TextureButton" parent="CanvasLayer"]
+[node name="FireButton" type="TextureButton" parent="FrameLayer"]
 offset_left = 20.0
 offset_top = 720.0
 offset_right = 84.0
@@ -160,10 +164,10 @@ autostart = true
 [node name="EnemyMissileTimer" type="Timer" parent="Enemy"]
 autostart = true
 
-[connection signal="button_down" from="CanvasLayer/LeftButton" to="." method="_on_left_button_button_down"]
-[connection signal="button_up" from="CanvasLayer/LeftButton" to="." method="_on_left_button_button_up"]
-[connection signal="button_down" from="CanvasLayer/RightButton" to="." method="_on_right_button_button_down"]
-[connection signal="button_up" from="CanvasLayer/RightButton" to="." method="_on_right_button_button_up"]
-[connection signal="button_down" from="CanvasLayer/FireButton" to="." method="_on_fire_button_button_down"]
+[connection signal="button_down" from="FrameLayer/LeftButton" to="." method="_on_left_button_button_down"]
+[connection signal="button_up" from="FrameLayer/LeftButton" to="." method="_on_left_button_button_up"]
+[connection signal="button_down" from="FrameLayer/RightButton" to="." method="_on_right_button_button_down"]
+[connection signal="button_up" from="FrameLayer/RightButton" to="." method="_on_right_button_button_up"]
+[connection signal="button_down" from="FrameLayer/FireButton" to="." method="_on_fire_button_button_down"]
 [connection signal="timeout" from="Enemy/EnemyMoveTimer" to="." method="_on_enemy_move_timer_timeout"]
 [connection signal="timeout" from="Enemy/EnemyMissileTimer" to="." method="_on_enemy_missile_timer_timeout"]
