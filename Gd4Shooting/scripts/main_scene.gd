@@ -27,7 +27,7 @@ const HI_SCORE_FN = "user://data.txt"
 var Missile = load("res://missile.tscn")
 var Bunker8 = load("res://bunker_8.tscn")
 var Enemy1 = load("res://enemy_1.tscn")
-var EnemyMissile = load("res://EnemyMissile.tscn")
+var EnemyMissile = load("res://enemy_missile.tscn")
 var Explosion = load("res://Explosion.tscn")
 
 var gameOver = false
@@ -98,6 +98,74 @@ func setup_bunkers():
 		bkr.position = Vector2((x+1)*100, 580)
 		add_child(bkr)
 		bunkers.push_back(bkr)
+func fireEnemyMissile():
+	if gameOver || exploding || paused || !nEnemies:
+		return
+	var r = randi() % nEnemies      # ミサイルを発射する敵
+	var ix = 0
+	while true:
+		while enemies[ix] == null:  # 空要素はスキップ
+			ix += 1
+		if r == 0:
+			break
+		ix += 1
+		r -= 1
+	if enemies[ix] != null:
+		var em = EnemyMissile.instantiate()
+		em.position = enemies[ix].position
+		em.position.y += ENEMY_MISSILE_OFFSET
+		add_child(em)
+		while !enemyMissiles.is_empty() && enemyMissiles[0] == null:
+			enemyMissiles.pop_front()       # 空要素削除
+		enemyMissiles.push_back(em)
+	pass
+func updateLeftFighter():
+	$FrameLayer/nFighter.text = "%d" % nFighter
+	$FrameLayer/Sprite1.set_visible(nFighter>1)
+	$FrameLayer/Sprite2.set_visible(nFighter>2)
+func clearAllMissiles():
+	for em in enemyMissiles:
+		if em != null:
+			em.queue_free()
+	enemyMissiles.clear()   
+func explodeFighter():
+	$Fighter/Sprite2D.hide()
+	$Fighter/Explosion.restart()
+	exploding = true
+	clearAllMissiles();     # 敵ミサイル消去
+	dur_expl = 0.0
+	nFighter -= 1
+	if nFighter == 0:       # 自機：０、ゲームオーバー
+		gameOver = true
+		$DlgLayer/GameOverDlg.window_title = "GodotShooting"
+		$DlgLayer/GameOverDlg.dialog_text = "GAME OVER\nTRY AGAIN ?"
+		$DlgLayer/GameOverDlg.popup_centered()
+	updateLeftFighter()
+	#clearAllMissiles()
+	if missile != null:
+		missile.queue_free()    # 自機ミサイル消去
+		missile = null
+func processEnemyMissiles():
+	var ix = 0
+	for em in enemyMissiles:
+		if em != null:
+			var bc = em.move_and_collide(emv)
+			if bc != null && !exploding:
+				if bc.get_collider() == $Fighter:     # 自機に命中
+					#var expl = Explosion.instance()
+					#expl.position = $Fighter.position
+					#add_child(expl)
+					explodeFighter()
+					return
+				else:
+					bc.get_collider().queue_free()
+				em.queue_free()
+				enemyMissiles[ix] = null
+			elif em.position.y >= 700:
+				em.queue_free()
+				enemyMissiles[ix] = null
+		ix += 1
+	pass
 func fireMissile():     # 自機ミサイル発射
 	if missile == null:
 		UFOPntIX += 1
@@ -197,6 +265,7 @@ func _physics_process(delta):
 		$Fighter.position.x = min(MAX_FIGHTER_X, $Fighter.position.x)
 	if missile != null:     # 自機ミサイル飛翔中
 		processMissile()
+	processEnemyMissiles()      # 敵ミサイル処理
 	pass
 
 func _input(event):
@@ -235,3 +304,5 @@ func _on_fire_button_button_down():
 
 func _on_enemy_move_timer_timeout():
 	moveEnemies()       # 敵機移動
+func _on_enemy_missile_timer_timeout():
+	fireEnemyMissile()

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpgbcotsiia0e"]
+
+[ext_resource type="Texture2D" uid="uid://bgw7u52foqk8r" path="res://images/missile2.png" id="1_db3mr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lty3d"]
+size = Vector2(8, 20)
+
+[node name="EnemyMissile" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_db3mr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lty3d")
