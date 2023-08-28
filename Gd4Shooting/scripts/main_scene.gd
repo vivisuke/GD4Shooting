@@ -31,7 +31,7 @@ var EnemyMissile = load("res://EnemyMissile.tscn")
 var Explosion = load("res://Explosion.tscn")
 
 var gameOver = false
-var paused = true
+var paused = false
 var level = 0
 var invaded = false         # 敵機が最下段に到達
 #var gameOverDlg = null
@@ -141,6 +141,50 @@ func processMissile():              # 自機ミサイル処理
 			##		#setup_enemies()
 
 
+func animateEnemies():  # 敵アニメーション処理
+	if gameOver || paused:
+		return
+	for y in range(ENEMY_N_VERT):
+		for x in range(ENEMY_N_HORZ):
+			var ix = x+y*ENEMY_N_HORZ
+			if enemies[ix] != null:
+				var node = enemies[ix].get_node("Sprite")
+				#var fr : int = node.frame
+				#fr ^= 1
+				#print(node.frame)
+				node.frame ^= 1
+				#print(node.frame)
+func next_enemy(ix):        # 次に移動する敵機 ix を取得
+	while nEnemies != 0:    # 敵機が残っている間
+		ix += 1
+		if ix == ENEMY_N_HORZ * ENEMY_N_VERT:   # 最後の敵機を超えた場合
+			if move_down:   # 全部の敵機が下に移動した場合
+				move_down = false
+			elif en_collied:        # 左右端に達している場合
+				en_collied = false
+				move_right = !move_right    # 左右移動方向反転
+				move_down = true            # 下移動フラグON
+			ix = 0
+		if enemies[ix] != null:     # ix の敵機が生きている場合
+			break
+	return ix
+func moveEnemies():     # 敵移動処理
+	if gameOver || paused:      # ゲームオーバー、ポーズ時は移動しない
+		return
+	if enemies[mv_ix] != null:      # 次の敵機が存在していれば
+		if move_down:               # 下方向移動
+			enemies[mv_ix].position.y += ENEMY_V_PITCH / 2
+		elif move_right:            # 右方向移動
+			enemies[mv_ix].position.x += ENEMY_MOVE_UNIT
+			if enemies[mv_ix].position.x >= MAX_ENEMY_X:
+				en_collied = true;  # 右端に達した → フラグON
+		else:                       # 左方向移動
+			enemies[mv_ix].position.x -= ENEMY_MOVE_UNIT
+			if enemies[mv_ix].position.x <= MIN_ENEMY_X:
+				en_collied = true;  # 左端に達した → フラグON
+		if enemies[mv_ix].position.y >= MAX_ENEMY_Y:    # 侵略された場合
+			invaded = true
+	mv_ix = next_enemy(mv_ix)       # 次の移動敵機取得
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
@@ -187,3 +231,7 @@ func _on_right_button_button_up():
 
 func _on_fire_button_button_down():
 	fireMissile()       # 自機ミサイル発射
+
+
+func _on_enemy_move_timer_timeout():
+	moveEnemies()       # 敵機移動
