@@ -186,30 +186,62 @@ func processMissile():              # 自機ミサイル処理
 		else:
 			var bc = missile.move_and_collide(mv)
 			#print(bc)
-			##if bc != null:      # 敵機に当たった場合
-			##	missile.queue_free()
-			##	missile = null
-			##	if bc.collider == $UFO:         # UFO に当たった場合
-			##		$UFOLabel.rect_position.x = $UFO.position.x
-			##		$UFOLabel.text = "%d" % UFO_POINTS[UFOPntIX]
-			##		$UFOLabel/Timer.start()
-			##		$UFO.position.x = -1
-			##		#print("UFO")
-			##		score += UFO_POINTS[UFOPntIX]
-			##		updateScoreLabel()
-			##	else:
-			##		remove_enemy(bc.collider)   # 撃墜した敵機を削除, score更新
-			##		bc.collider.queue_free()
+			if bc != null:      # 敵機に当たった場合
+				missile.queue_free()
+				missile = null
+				if bc.get_collider() == $UFO:         # UFO に当たった場合
+					$UFOLabel.position.x = $UFO.position.x
+					$UFOLabel.text = "%d" % UFO_POINTS[UFOPntIX]
+					$UFOLabel/Timer.start()
+					$UFO.position.x = -1
+					#print("UFO")
+					score += UFO_POINTS[UFOPntIX]
+					updateScoreLabel()
+				else:
+					remove_enemy(bc.get_collider())   # 撃墜した敵機を削除, score更新
+					bc.get_collider().queue_free()
 			##	$AudioMissile.stop()        # ミサイル発射音停止
 			##	$AudioExplosion.play()      # 爆発音
-			##	updateScoreLabel()
-			##	if nEnemies == 0:       # 敵をすべて撃破した場合
-			##		paused = true
-			##		$NextLevel.show()
-			##		#level += 1
-			##		#setup_enemies()
-
-
+				updateScoreLabel()
+				if nEnemies == 0:       # 敵をすべて撃破した場合
+					paused = true
+					$NextLevel.show()
+					#level += 1
+					#setup_enemies()
+func remove_enemy(ptr):     # 撃墜した敵機を削除
+	for ix in range(enemies.size()):
+		if enemies[ix] == ptr:
+	#var ix : int = ptr.get("aryix")
+			var pnt = floor(ix / (ENEMY_N_HORZ*2)) + 1
+			score += pnt * 10
+			enemies[ix] = null
+			nEnemies -= 1
+			return
+func load_hi_score():
+	hi_score = 0
+	##var f = File.new()
+	##if f.file_exists(HI_SCORE_FN):
+	##	var err = f.open(HI_SCORE_FN, File.READ)
+	##	if err == OK:
+	##		hi_score = f.get_32()
+	##	f.close()
+func save_hi_score():
+	##var f = File.new()
+	##var err = f.open(HI_SCORE_FN, File.WRITE)
+	##if err == OK:
+	##	f.store_32(hi_score)
+	##f.close()
+	pass
+func updateHiScoreLabel():
+	var txt = "%05d" % hi_score
+	$FrameLayer/HiScore.text = txt
+func updateScoreLabel():
+	var txt = "%05d" % score
+	$FrameLayer/Score.text = txt
+	if score > hi_score:
+		hi_score = score
+		updateHiScoreLabel()
+		save_hi_score()
 func animateEnemies():  # 敵アニメーション処理
 	if gameOver || paused:
 		return
