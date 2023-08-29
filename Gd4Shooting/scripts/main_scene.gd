@@ -28,7 +28,7 @@ var Missile = load("res://missile.tscn")
 var Bunker8 = load("res://bunker_8.tscn")
 var Enemy1 = load("res://enemy_1.tscn")
 var EnemyMissile = load("res://enemy_missile.tscn")
-var Explosion = load("res://explosion.tscn")
+#var Explosion = load("res://explosion.tscn")
 
 var gameOver = false
 var paused = false
@@ -173,6 +173,7 @@ func fireMissile():     # 自機ミサイル発射
 		if UFOPntIX == UFO_POINTS.size():
 			UFOPntIX = 0
 		missile = Missile.instantiate()
+		#var pos = $Fighter.position
 		missile.position = $Fighter.position
 		#print(missile.position)
 		#bullet.position.x += 6
@@ -290,6 +291,18 @@ func moveEnemies():     # 敵移動処理
 func _process(delta):
 	pass
 func _physics_process(delta):
+	if gameOver || paused:
+		return
+	if exploding:       # 爆発中
+		dur_expl += delta
+		if dur_expl >= 2.0 && nFighter != 0:
+			exploding = false
+			$Fighter/Sprite2D.show()
+		else:
+			return
+	if $UFO.position.x > 0:     # UFO 出現中
+		$UFO.position.x -= UFO_MOVE_UNIT*delta
+		#$UFO/Sprite.frame ^= 1
 	if move_fighter == KEY_LEFT:
 		$Fighter.position.x -= delta * FIGHTER_MOVE_UNIT
 		$Fighter.position.x = max(MIN_FIGHTER_X, $Fighter.position.x)
