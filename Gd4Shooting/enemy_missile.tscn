@@ -6,6 +6,8 @@
 size = Vector2(8, 20)
 
 [node name="EnemyMissile" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 1025
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_db3mr")
