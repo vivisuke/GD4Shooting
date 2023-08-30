@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://swmccl33px8h"]
+[gd_scene load_steps=19 format=3 uid="uid://swmccl33px8h"]
 
 [ext_resource type="Texture2D" uid="uid://drgxckcu0gy70" path="res://images/ufo.png" id="1_3lpbb"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_af567"]
 [ext_resource type="Texture2D" uid="uid://grftf0fkt3gk" path="res://images/frame.png" id="1_blcxp"]
 [ext_resource type="Texture2D" uid="uid://coqquwd0ha2qh" path="res://images/title.png" id="2_hmrqn"]
+[ext_resource type="FontFile" uid="uid://b73hdby63bfjq" path="res://fonts/PixelMplus12-Bold.ttf" id="3_1bwvd"]
 [ext_resource type="FontFile" uid="uid://478bnoav4k7" path="res://fonts/PixelMplus12-Regular.ttf" id="3_yeb5j"]
 [ext_resource type="Texture2D" uid="uid://bp7q577oy44lu" path="res://images/player1.png" id="4_fen7f"]
 [ext_resource type="PackedScene" uid="uid://cu65l8agwr24g" path="res://explosion.tscn" id="4_q7k30"]
@@ -45,6 +46,19 @@ shape = SubResource("RectangleShape2D_61dx6")
 [node name="UFOTimer" type="Timer" parent="UFO"]
 wait_time = 10.0
 autostart = true
+
+[node name="UFOLabel" type="Label" parent="."]
+offset_left = -100.0
+offset_top = 140.0
+offset_right = -52.0
+offset_bottom = 179.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_1bwvd")
+theme_override_font_sizes/font_size = 32
+text = "300"
+
+[node name="Timer" type="Timer" parent="UFOLabel"]
+one_shot = true
 
 [node name="Fighter" type="CharacterBody2D" parent="."]
 position = Vector2(250, 620)
@@ -174,6 +188,7 @@ autostart = true
 stream = ExtResource("15_rg3oo")
 
 [connection signal="timeout" from="UFO/UFOTimer" to="." method="_on_ufo_timer_timeout"]
+[connection signal="timeout" from="UFOLabel/Timer" to="." method="_on_UFOLabelTimer_timeout"]
 [connection signal="button_down" from="FrameLayer/LeftButton" to="." method="_on_left_button_button_down"]
 [connection signal="button_up" from="FrameLayer/LeftButton" to="." method="_on_left_button_button_up"]
 [connection signal="button_down" from="FrameLayer/RightButton" to="." method="_on_right_button_button_down"]
