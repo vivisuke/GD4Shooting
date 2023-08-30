@@ -66,6 +66,8 @@ func _ready():
 	#print("KEY_LEFT = ", KEY_LEFT)
 	#print("KEY_RIGHT = ", KEY_RIGHT)
 	$NextLevel.hide()
+	load_hi_score()
+	updateHiScoreLabel()
 	setup_enemies()
 	setup_bunkers()
 	pass # Replace with function body.
@@ -244,19 +246,14 @@ func remove_enemy(ptr):     # 撃墜した敵機を削除
 			return
 func load_hi_score():
 	hi_score = 0
-	##var f = File.new()
-	##if f.file_exists(HI_SCORE_FN):
-	##	var err = f.open(HI_SCORE_FN, File.READ)
-	##	if err == OK:
-	##		hi_score = f.get_32()
-	##	f.close()
+	if FileAccess.file_exists(HI_SCORE_FN):
+		var f = FileAccess.open(HI_SCORE_FN, FileAccess.READ)
+		hi_score = f.get_32()
+		f.close()
 func save_hi_score():
-	##var f = File.new()
-	##var err = f.open(HI_SCORE_FN, File.WRITE)
-	##if err == OK:
-	##	f.store_32(hi_score)
-	##f.close()
-	pass
+	var f = FileAccess.open(HI_SCORE_FN, FileAccess.WRITE)
+	f.store_32(hi_score)
+	f.close()
 func updateHiScoreLabel():
 	var txt = "%05d" % hi_score
 	$FrameLayer/HiScore.text = txt
@@ -365,8 +362,8 @@ func _input(event):
 				setup_enemies()
 		else:
 			print("relesed")
-			move_fighter = 0
-
+			if kc == KEY_LEFT || kc == KEY_RIGHT:
+				move_fighter = 0
 
 func _on_left_button_button_down():
 	move_fighter = KEY_LEFT
