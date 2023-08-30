@@ -190,6 +190,7 @@ stream = ExtResource("15_rg3oo")
 [node name="DlgLayer" type="CanvasLayer" parent="."]
 
 [node name="GameOverDlg" type="AcceptDialog" parent="DlgLayer"]
+size = Vector2i(200, 150)
 
 [connection signal="timeout" from="UFO/UFOTimer" to="." method="_on_ufo_timer_timeout"]
 [connection signal="timeout" from="UFOLabel/Timer" to="." method="_on_UFOLabelTimer_timeout"]
