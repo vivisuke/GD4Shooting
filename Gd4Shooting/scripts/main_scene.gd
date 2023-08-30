@@ -65,6 +65,7 @@ var move_fighter = 0			# 自機移動方向、0 | KEY_LEFT | KEY_RIGHT
 func _ready():
 	#print("KEY_LEFT = ", KEY_LEFT)
 	#print("KEY_RIGHT = ", KEY_RIGHT)
+	$NextLevel.hide()
 	setup_enemies()
 	setup_bunkers()
 	pass # Replace with function body.
@@ -229,6 +230,7 @@ func processMissile():              # 自機ミサイル処理
 				if nEnemies == 0:       # 敵をすべて撃破した場合
 					paused = true
 					$NextLevel.show()
+					#gameOver = false
 					#level += 1
 					#setup_enemies()
 func remove_enemy(ptr):     # 撃墜した敵機を削除
@@ -345,7 +347,7 @@ func _input(event):
 	if event is InputEventKey:
 		#var k = InputEventKey(event)
 		var kc = event.keycode
-		print(kc)
+		#print(kc)
 		if event.is_pressed():
 			print("pressed")
 			if kc == KEY_LEFT || kc == KEY_RIGHT:
@@ -356,6 +358,11 @@ func _input(event):
 			#	$Fighter.position.x += 10
 			if kc == KEY_SPACE:
 				fireMissile()       # 自機ミサイル発射
+			if kc == KEY_ENTER && nEnemies == 0:
+				$NextLevel.hide()
+				paused = false
+				level += 1
+				setup_enemies()
 		else:
 			print("relesed")
 			move_fighter = 0

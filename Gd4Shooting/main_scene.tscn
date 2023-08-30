@@ -197,6 +197,17 @@ stream = ExtResource("15_rg3oo")
 size = Vector2i(300, 150)
 ok_button_text = "Yes"
 
+[node name="NextLevel" type="Label" parent="."]
+offset_top = 350.0
+offset_right = 500.0
+offset_bottom = 402.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_1bwvd")
+theme_override_font_sizes/font_size = 40
+text = "You are Great !
+hit Enter to next"
+horizontal_alignment = 1
+
 [connection signal="timeout" from="UFO/UFOTimer" to="." method="_on_ufo_timer_timeout"]
 [connection signal="timeout" from="UFOLabel/Timer" to="." method="_on_UFOLabelTimer_timeout"]
 [connection signal="button_down" from="FrameLayer/LeftButton" to="." method="_on_left_button_button_down"]
