@@ -303,12 +303,17 @@ func _physics_process(delta):
 	if $UFO.position.x > 0:     # UFO 出現中
 		$UFO.position.x -= UFO_MOVE_UNIT*delta
 		#$UFO/Sprite.frame ^= 1
+	var px = $Fighter.position.x
 	if move_fighter == KEY_LEFT:
 		$Fighter.position.x -= delta * FIGHTER_MOVE_UNIT
 		$Fighter.position.x = max(MIN_FIGHTER_X, $Fighter.position.x)
 	elif move_fighter == KEY_RIGHT:
 		$Fighter.position.x += delta * FIGHTER_MOVE_UNIT
 		$Fighter.position.x = min(MAX_FIGHTER_X, $Fighter.position.x)
+	if px != $Fighter.position.x:
+		$Fighter/Explosion.global_position = $Fighter.position
+		print("$Fighter.position.x = ", $Fighter.position.x)
+		print("exp.pos = ", $Fighter/Explosion.global_position)
 	if missile != null:     # 自機ミサイル飛翔中
 		processMissile()
 	processEnemyMissiles()      # 敵ミサイル処理
