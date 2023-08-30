@@ -176,7 +176,8 @@ func fireMissile():     # 自機ミサイル発射
 		#print(missile.position)
 		#bullet.position.x += 6
 		add_child(missile)
-		##$AudioMissile.play()
+		$Fighter/AudioMissile.play()
+		print("AudioMissile.position = ", $Fighter/AudioMissile.global_position)
 func processMissile():              # 自機ミサイル処理
 	if missile != null:
 		if missile.position.y < 0:  # 画面上部に出た場合

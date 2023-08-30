@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://swmccl33px8h"]
+[gd_scene load_steps=17 format=3 uid="uid://swmccl33px8h"]
 
 [ext_resource type="Texture2D" uid="uid://drgxckcu0gy70" path="res://images/ufo.png" id="1_3lpbb"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_af567"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://478bnoav4k7" path="res://fonts/PixelMplus12-Regular.ttf" id="3_yeb5j"]
 [ext_resource type="Texture2D" uid="uid://bp7q577oy44lu" path="res://images/player1.png" id="4_fen7f"]
 [ext_resource type="PackedScene" uid="uid://cu65l8agwr24g" path="res://explosion.tscn" id="4_q7k30"]
+[ext_resource type="AudioStream" uid="uid://d2qawy4uydsqo" path="res://sounds/missile.mp3" id="5_ryas6"]
 [ext_resource type="Texture2D" uid="uid://dja0yheg5otm5" path="res://images/left.png" id="5_s2j44"]
 [ext_resource type="Texture2D" uid="uid://dadui7g6ecdnv" path="res://images/right.png" id="6_iqbs6"]
 [ext_resource type="Texture2D" uid="uid://d4fkhab8pxn82" path="res://images/left_pressed.png" id="6_jlknt"]
@@ -54,6 +55,9 @@ shape = SubResource("RectangleShape2D_wqehj")
 
 [node name="Explosion" parent="Fighter" instance=ExtResource("4_q7k30")]
 position = Vector2(-250, -620)
+
+[node name="AudioMissile" type="AudioStreamPlayer2D" parent="Fighter"]
+stream = ExtResource("5_ryas6")
 
 [node name="FrameLayer" type="CanvasLayer" parent="."]
 
