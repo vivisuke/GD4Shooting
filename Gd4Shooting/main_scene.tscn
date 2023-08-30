@@ -39,7 +39,7 @@ hframes = 2
 position = Vector2(0.5, 1)
 shape = SubResource("RectangleShape2D_61dx6")
 
-[node name="Timer" type="Timer" parent="UFO"]
+[node name="UFOTimer" type="Timer" parent="UFO"]
 wait_time = 10.0
 autostart = true
 
@@ -164,6 +164,7 @@ autostart = true
 [node name="EnemyMissileTimer" type="Timer" parent="Enemy"]
 autostart = true
 
+[connection signal="timeout" from="UFO/UFOTimer" to="." method="_on_ufo_timer_timeout"]
 [connection signal="button_down" from="FrameLayer/LeftButton" to="." method="_on_left_button_button_down"]
 [connection signal="button_up" from="FrameLayer/LeftButton" to="." method="_on_left_button_button_up"]
 [connection signal="button_down" from="FrameLayer/RightButton" to="." method="_on_right_button_button_down"]

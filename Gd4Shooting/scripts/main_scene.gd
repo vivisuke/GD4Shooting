@@ -349,9 +349,13 @@ func _on_right_button_button_up():
 
 func _on_fire_button_button_down():
 	fireMissile()       # 自機ミサイル発射
-
-
 func _on_enemy_move_timer_timeout():
 	moveEnemies()       # 敵機移動
 func _on_enemy_missile_timer_timeout():
 	fireEnemyMissile()
+func _on_ufo_timer_timeout():
+	$UFO.position.x = SCREEN_WIDTH			# UFO出現
+func _on_UFOLabelTimer_timeout():
+	$UFOLabel.text = ""						# UFO得点消去
+
+
