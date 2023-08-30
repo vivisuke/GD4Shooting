@@ -189,19 +189,23 @@ func processMissile():              # 自機ミサイル処理
 			if bc != null:      # 敵機に当たった場合
 				missile.queue_free()
 				missile = null
+				var epos			# 敵機位置
 				if bc.get_collider() == $UFO:         # UFO に当たった場合
 					$UFOLabel.position.x = $UFO.position.x
 					$UFOLabel.text = "%d" % UFO_POINTS[UFOPntIX]
 					$UFOLabel/Timer.start()
+					epos = $UFO.global_position
 					$UFO.position.x = -1
 					#print("UFO")
 					score += UFO_POINTS[UFOPntIX]
 					updateScoreLabel()
 				else:
+					epos = bc.get_collider().global_position
 					remove_enemy(bc.get_collider())   # 撃墜した敵機を削除, score更新
 					bc.get_collider().queue_free()
-			##	$AudioMissile.stop()        # ミサイル発射音停止
-			##	$AudioExplosion.play()      # 爆発音
+				$Fighter/AudioMissile.stop()		# ミサイル発射音停止
+				$Enemy/AudioExplosion.global_position = epos
+				$Enemy/AudioExplosion.play()		# 敵機爆発音
 				updateScoreLabel()
 				if nEnemies == 0:       # 敵をすべて撃破した場合
 					paused = true

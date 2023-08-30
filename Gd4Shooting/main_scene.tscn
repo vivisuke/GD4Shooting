@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://swmccl33px8h"]
+[gd_scene load_steps=18 format=3 uid="uid://swmccl33px8h"]
 
 [ext_resource type="Texture2D" uid="uid://drgxckcu0gy70" path="res://images/ufo.png" id="1_3lpbb"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_af567"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cwxsmdsu17kyh" path="res://images/btn2.png" id="7_qg3xw"]
 [ext_resource type="Texture2D" uid="uid://bw0gtcccg51s6" path="res://images/btn2_pressed.png" id="8_a56ai"]
 [ext_resource type="Texture2D" uid="uid://cpn3fnhc8le8h" path="res://images/right_pressed.png" id="8_gvjdy"]
+[ext_resource type="AudioStream" uid="uid://xw3uda5s15me" path="res://sounds/explosion-1.mp3" id="15_rg3oo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61dx6"]
 size = Vector2(64, 32)
@@ -167,6 +168,9 @@ autostart = true
 
 [node name="EnemyMissileTimer" type="Timer" parent="Enemy"]
 autostart = true
+
+[node name="AudioExplosion" type="AudioStreamPlayer2D" parent="Enemy"]
+stream = ExtResource("15_rg3oo")
 
 [connection signal="timeout" from="UFO/UFOTimer" to="." method="_on_ufo_timer_timeout"]
 [connection signal="button_down" from="FrameLayer/LeftButton" to="." method="_on_left_button_button_down"]
