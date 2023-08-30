@@ -151,6 +151,7 @@ func explodeFighter():
 	$Fighter/Sprite2D.hide()
 	$Fighter/Explosion.global_position = $Fighter.position
 	$Fighter/Explosion.restart()
+	$Fighter/AudioExplosion.play()
 	exploding = true
 	clearAllMissiles();     # 敵ミサイル消去
 	dur_expl = 0.0

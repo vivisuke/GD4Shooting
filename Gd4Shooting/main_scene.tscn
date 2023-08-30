@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://swmccl33px8h"]
+[gd_scene load_steps=20 format=3 uid="uid://swmccl33px8h"]
 
 [ext_resource type="Texture2D" uid="uid://drgxckcu0gy70" path="res://images/ufo.png" id="1_3lpbb"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_af567"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dja0yheg5otm5" path="res://images/left.png" id="5_s2j44"]
 [ext_resource type="Texture2D" uid="uid://dadui7g6ecdnv" path="res://images/right.png" id="6_iqbs6"]
 [ext_resource type="Texture2D" uid="uid://d4fkhab8pxn82" path="res://images/left_pressed.png" id="6_jlknt"]
+[ext_resource type="AudioStream" uid="uid://dqq8162h20t0b" path="res://sounds/explosion-3.mp3" id="7_kwx1s"]
 [ext_resource type="Texture2D" uid="uid://cwxsmdsu17kyh" path="res://images/btn2.png" id="7_qg3xw"]
 [ext_resource type="Texture2D" uid="uid://bw0gtcccg51s6" path="res://images/btn2_pressed.png" id="8_a56ai"]
 [ext_resource type="Texture2D" uid="uid://cpn3fnhc8le8h" path="res://images/right_pressed.png" id="8_gvjdy"]
@@ -74,6 +75,9 @@ position = Vector2(-250, -620)
 
 [node name="AudioMissile" type="AudioStreamPlayer2D" parent="Fighter"]
 stream = ExtResource("5_ryas6")
+
+[node name="AudioExplosion" type="AudioStreamPlayer2D" parent="Fighter"]
+stream = ExtResource("7_kwx1s")
 
 [node name="FrameLayer" type="CanvasLayer" parent="."]
 
@@ -190,7 +194,8 @@ stream = ExtResource("15_rg3oo")
 [node name="DlgLayer" type="CanvasLayer" parent="."]
 
 [node name="GameOverDlg" type="AcceptDialog" parent="DlgLayer"]
-size = Vector2i(200, 150)
+size = Vector2i(300, 150)
+ok_button_text = "Yes"
 
 [connection signal="timeout" from="UFO/UFOTimer" to="." method="_on_ufo_timer_timeout"]
 [connection signal="timeout" from="UFOLabel/Timer" to="." method="_on_UFOLabelTimer_timeout"]

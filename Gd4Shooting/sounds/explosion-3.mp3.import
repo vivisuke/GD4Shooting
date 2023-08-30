@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/explosion-3.mp3-2d5173f9376de2fc8cd28f0ef81fc
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
 bpm=0
 beat_count=0
