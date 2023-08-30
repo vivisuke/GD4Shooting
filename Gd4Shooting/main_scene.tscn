@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://swmccl33px8h"]
+[gd_scene load_steps=21 format=3 uid="uid://swmccl33px8h"]
 
 [ext_resource type="Texture2D" uid="uid://drgxckcu0gy70" path="res://images/ufo.png" id="1_3lpbb"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_af567"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bw0gtcccg51s6" path="res://images/btn2_pressed.png" id="8_a56ai"]
 [ext_resource type="Texture2D" uid="uid://cpn3fnhc8le8h" path="res://images/right_pressed.png" id="8_gvjdy"]
 [ext_resource type="AudioStream" uid="uid://xw3uda5s15me" path="res://sounds/explosion-1.mp3" id="15_rg3oo"]
+[ext_resource type="Texture2D" uid="uid://brmebwgh63mbq" path="res://images/volume_up.png" id="17_lx8n8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61dx6"]
 size = Vector2(64, 32)
@@ -178,6 +179,14 @@ offset_right = 84.0
 offset_bottom = 784.0
 texture_normal = ExtResource("7_qg3xw")
 texture_pressed = ExtResource("8_a56ai")
+
+[node name="CheckButton" type="CheckButton" parent="FrameLayer"]
+offset_left = 320.0
+offset_top = 660.0
+offset_right = 469.0
+offset_bottom = 716.0
+text = "Sound"
+icon = ExtResource("17_lx8n8")
 
 [node name="Enemy" type="Node2D" parent="."]
 
