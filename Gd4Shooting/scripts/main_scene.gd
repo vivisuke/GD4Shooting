@@ -50,8 +50,8 @@ var emv = Vector2(0, ENEMY_MISSILE_DY)
 #var dur_em = 0.0   # for 敵ミサイル発射
 var dur_expl = 0.0      # 爆発中カウンタ
 var mv_ix = 0
-var move_down : bool = false        # 敵機下移動
-var move_right : bool = false       # 敵機右移動
+var move_enmy_down : bool = false        # 敵機下移動
+var move_enmy_right : bool = false       # 敵機右移動
 var en_collied : bool = false       # 敵機が左右端に達した
 var enemies = []        # 敵機管理用配列
 var nEnemies = 0        # 敵機数
@@ -59,8 +59,6 @@ var enemyMissiles = []  # 敵ミサイル
 var bunkers = []        # バンカー（防御壁）
 var leftPressed : bool = false
 var rightPressed : bool = false
-
-
 var move_fighter = 0			# 自機移動方向、0 | KEY_LEFT | KEY_RIGHT
 
 # Called when the node enters the scene tree for the first time.
@@ -70,6 +68,26 @@ func _ready():
 	setup_enemies()
 	setup_bunkers()
 	pass # Replace with function body.
+func restartGame():
+	gameOver = false
+	invaded = false
+	exploding = false
+	move_enmy_down = false
+	move_enmy_right = false
+	move_fighter = 0
+	nFighter = 3
+	score = 0
+	level = 0
+	autoMoving = false
+	$Fighter/Sprite2D.show()
+	for ix in range(enemies.size()):    # 現状の敵機をすべて消去
+		if enemies[ix] != null:
+			enemies[ix].queue_free()
+			enemies[ix] = null
+	setup_enemies()
+	setup_bunkers()
+	updateLeftFighter()
+	updateScoreLabel()
 func setup_enemies():
 	print("level = ", level)
 	$UFO.position.x = -1        # UFO を画面外に移動
@@ -139,7 +157,7 @@ func explodeFighter():
 	nFighter -= 1
 	if nFighter == 0:       # 自機：０、ゲームオーバー
 		gameOver = true
-		$DlgLayer/GameOverDlg.window_title = "GodotShooting"
+		$DlgLayer/GameOverDlg.title = "GodotShooting"
 		$DlgLayer/GameOverDlg.dialog_text = "GAME OVER\nTRY AGAIN ?"
 		$DlgLayer/GameOverDlg.popup_centered()
 	updateLeftFighter()
@@ -263,12 +281,12 @@ func next_enemy(ix):        # 次に移動する敵機 ix を取得
 	while nEnemies != 0:    # 敵機が残っている間
 		ix += 1
 		if ix == ENEMY_N_HORZ * ENEMY_N_VERT:   # 最後の敵機を超えた場合
-			if move_down:   # 全部の敵機が下に移動した場合
-				move_down = false
+			if move_enmy_down:   # 全部の敵機が下に移動した場合
+				move_enmy_down = false
 			elif en_collied:        # 左右端に達している場合
 				en_collied = false
-				move_right = !move_right    # 左右移動方向反転
-				move_down = true            # 下移動フラグON
+				move_enmy_right = !move_enmy_right    # 左右移動方向反転
+				move_enmy_down = true            # 下移動フラグON
 			ix = 0
 		if enemies[ix] != null:     # ix の敵機が生きている場合
 			break
@@ -277,9 +295,9 @@ func moveEnemies():     # 敵移動処理
 	if gameOver || paused:      # ゲームオーバー、ポーズ時は移動しない
 		return
 	if enemies[mv_ix] != null:      # 次の敵機が存在していれば
-		if move_down:               # 下方向移動
+		if move_enmy_down:               # 下方向移動
 			enemies[mv_ix].position.y += ENEMY_V_PITCH / 2
-		elif move_right:            # 右方向移動
+		elif move_enmy_right:            # 右方向移動
 			enemies[mv_ix].position.x += ENEMY_MOVE_UNIT
 			if enemies[mv_ix].position.x >= MAX_ENEMY_X:
 				en_collied = true;  # 右端に達した → フラグON
@@ -364,3 +382,8 @@ func _on_UFOLabelTimer_timeout():
 	$UFOLabel.text = ""						# UFO得点消去
 
 
+
+
+func _on_game_over_dlg_confirmed():
+	restartGame()
+	pass # Replace with function body.
