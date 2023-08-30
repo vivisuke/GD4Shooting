@@ -32,6 +32,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="UFO" type="CharacterBody2D" parent="."]
 position = Vector2(250, 140)
+collision_layer = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="UFO"]
 texture = ExtResource("1_3lpbb")
