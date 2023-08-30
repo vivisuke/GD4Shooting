@@ -381,9 +381,7 @@ func _on_ufo_timer_timeout():
 func _on_UFOLabelTimer_timeout():
 	$UFOLabel.text = ""						# UFO得点消去
 
-
-
-
 func _on_game_over_dlg_confirmed():
 	restartGame()
-	pass # Replace with function body.
+func _on_game_over_dlg_canceled():
+	restartGame()

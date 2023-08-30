@@ -201,4 +201,5 @@ size = Vector2i(200, 150)
 [connection signal="button_down" from="FrameLayer/FireButton" to="." method="_on_fire_button_button_down"]
 [connection signal="timeout" from="Enemy/EnemyMoveTimer" to="." method="_on_enemy_move_timer_timeout"]
 [connection signal="timeout" from="Enemy/EnemyMissileTimer" to="." method="_on_enemy_missile_timer_timeout"]
+[connection signal="canceled" from="DlgLayer/GameOverDlg" to="." method="_on_game_over_dlg_canceled"]
 [connection signal="confirmed" from="DlgLayer/GameOverDlg" to="." method="_on_game_over_dlg_confirmed"]
