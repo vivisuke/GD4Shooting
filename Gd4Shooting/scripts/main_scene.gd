@@ -131,6 +131,7 @@ func clearAllMissiles():
 	enemyMissiles.clear()   
 func explodeFighter():
 	$Fighter/Sprite2D.hide()
+	$Fighter/Explosion.global_position = $Fighter.position
 	$Fighter/Explosion.restart()
 	exploding = true
 	clearAllMissiles();     # 敵ミサイル消去
@@ -153,9 +154,6 @@ func processEnemyMissiles():
 			var bc = em.move_and_collide(emv)
 			if bc != null && !exploding:
 				if bc.get_collider() == $Fighter:     # 自機に命中
-					#var expl = Explosion.instance()
-					#expl.position = $Fighter.position
-					#add_child(expl)
 					explodeFighter()
 					return
 				else:
@@ -310,10 +308,10 @@ func _physics_process(delta):
 	elif move_fighter == KEY_RIGHT:
 		$Fighter.position.x += delta * FIGHTER_MOVE_UNIT
 		$Fighter.position.x = min(MAX_FIGHTER_X, $Fighter.position.x)
-	if px != $Fighter.position.x:
-		$Fighter/Explosion.global_position = $Fighter.position
-		print("$Fighter.position.x = ", $Fighter.position.x)
-		print("exp.pos = ", $Fighter/Explosion.global_position)
+	#if px != $Fighter.position.x:
+	#	$Fighter/Explosion.global_position = $Fighter.position
+	#	print("$Fighter.position.x = ", $Fighter.position.x)
+	#	print("exp.pos = ", $Fighter/Explosion.global_position)
 	if missile != null:     # 自機ミサイル飛翔中
 		processMissile()
 	processEnemyMissiles()      # 敵ミサイル処理
