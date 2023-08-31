@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://swmccl33px8h"]
+[gd_scene load_steps=22 format=3 uid="uid://swmccl33px8h"]
 
 [ext_resource type="Texture2D" uid="uid://drgxckcu0gy70" path="res://images/ufo.png" id="1_3lpbb"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_af567"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://coqquwd0ha2qh" path="res://images/title.png" id="2_hmrqn"]
 [ext_resource type="FontFile" uid="uid://b73hdby63bfjq" path="res://fonts/PixelMplus12-Bold.ttf" id="3_1bwvd"]
 [ext_resource type="FontFile" uid="uid://478bnoav4k7" path="res://fonts/PixelMplus12-Regular.ttf" id="3_yeb5j"]
+[ext_resource type="AudioStream" uid="uid://dnnvj4f0tbjpp" path="res://sounds/warning.mp3" id="3_yk2ug"]
 [ext_resource type="Texture2D" uid="uid://bp7q577oy44lu" path="res://images/player1.png" id="4_fen7f"]
 [ext_resource type="PackedScene" uid="uid://cu65l8agwr24g" path="res://explosion.tscn" id="4_q7k30"]
 [ext_resource type="AudioStream" uid="uid://d2qawy4uydsqo" path="res://sounds/missile.mp3" id="5_ryas6"]
@@ -48,6 +49,9 @@ shape = SubResource("RectangleShape2D_61dx6")
 [node name="UFOTimer" type="Timer" parent="UFO"]
 wait_time = 10.0
 autostart = true
+
+[node name="AudioWarning" type="AudioStreamPlayer2D" parent="UFO"]
+stream = ExtResource("3_yk2ug")
 
 [node name="UFOLabel" type="Label" parent="."]
 offset_left = -100.0

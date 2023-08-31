@@ -383,6 +383,7 @@ func _on_enemy_missile_timer_timeout():
 	fireEnemyMissile()
 func _on_ufo_timer_timeout():
 	$UFO.position.x = SCREEN_WIDTH			# UFO出現
+	$UFO/AudioWarning.play()
 func _on_UFOLabelTimer_timeout():
 	$UFOLabel.text = ""						# UFO得点消去
 
