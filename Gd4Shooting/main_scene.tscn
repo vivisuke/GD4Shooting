@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://swmccl33px8h"]
+[gd_scene load_steps=23 format=3 uid="uid://swmccl33px8h"]
 
 [ext_resource type="Texture2D" uid="uid://drgxckcu0gy70" path="res://images/ufo.png" id="1_3lpbb"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_af567"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cpn3fnhc8le8h" path="res://images/right_pressed.png" id="8_gvjdy"]
 [ext_resource type="AudioStream" uid="uid://xw3uda5s15me" path="res://sounds/explosion-1.mp3" id="15_rg3oo"]
 [ext_resource type="Texture2D" uid="uid://brmebwgh63mbq" path="res://images/volume_up.png" id="17_lx8n8"]
+[ext_resource type="Texture2D" uid="uid://bwo2ba80wlcni" path="res://images/volume_off_black.png" id="20_2vavg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61dx6"]
 size = Vector2(64, 32)
@@ -220,6 +221,20 @@ theme_override_font_sizes/font_size = 40
 text = "You are Great !
 hit Enter to next"
 horizontal_alignment = 1
+
+[node name="SoundOnRect" type="TextureRect" parent="."]
+offset_left = 550.0
+offset_top = 660.0
+offset_right = 598.0
+offset_bottom = 708.0
+texture = ExtResource("17_lx8n8")
+
+[node name="SoundOffRect" type="TextureRect" parent="."]
+offset_left = 600.0
+offset_top = 660.0
+offset_right = 648.0
+offset_bottom = 708.0
+texture = ExtResource("20_2vavg")
 
 [connection signal="timeout" from="UFO/UFOTimer" to="." method="_on_ufo_timer_timeout"]
 [connection signal="timeout" from="UFOLabel/Timer" to="." method="_on_UFOLabelTimer_timeout"]

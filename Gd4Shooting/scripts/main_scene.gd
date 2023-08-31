@@ -400,3 +400,7 @@ func _on_game_over_dlg_canceled():
 	restartGame()
 func _on_sound_button_toggled(button_pressed):
 	sound = button_pressed
+	if sound:
+		$FrameLayer/SoundButton.icon = $SoundOnRect.texture
+	else:
+		$FrameLayer/SoundButton.icon = $SoundOffRect.texture
