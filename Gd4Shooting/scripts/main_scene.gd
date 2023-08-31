@@ -33,6 +33,7 @@ var EnemyMissile = load("res://enemy_missile.tscn")
 var gameOver = false
 var paused = false
 var level = 0
+var sound = true			# 効果音 ON/OFF
 var invaded = false         # 敵機が最下段に到達
 #var gameOverDlg = null
 var exploding = false       # 爆発中
@@ -66,6 +67,8 @@ func _ready():
 	#print("KEY_LEFT = ", KEY_LEFT)
 	#print("KEY_RIGHT = ", KEY_RIGHT)
 	$NextLevel.hide()
+	$FrameLayer/SoundButton.set_pressed_no_signal(true)
+	$FrameLayer/SoundButton.set_focus_mode(Control.FOCUS_NONE)
 	load_hi_score()
 	updateHiScoreLabel()
 	setup_enemies()
@@ -154,7 +157,7 @@ func explodeFighter():
 	$Fighter/Sprite2D.hide()
 	$Fighter/Explosion.global_position = $Fighter.position
 	$Fighter/Explosion.restart()
-	$Fighter/AudioExplosion.play()
+	if sound: $Fighter/AudioExplosion.play()
 	exploding = true
 	clearAllMissiles();     # 敵ミサイル消去
 	dur_expl = 0.0
@@ -198,7 +201,7 @@ func fireMissile():     # 自機ミサイル発射
 		#print(missile.position)
 		#bullet.position.x += 6
 		add_child(missile)
-		$Fighter/AudioMissile.play()
+		if sound: $Fighter/AudioMissile.play()
 		print("AudioMissile.position = ", $Fighter/AudioMissile.global_position)
 func processMissile():              # 自機ミサイル処理
 	if missile != null:
@@ -227,7 +230,7 @@ func processMissile():              # 自機ミサイル処理
 					bc.get_collider().queue_free()
 				$Fighter/AudioMissile.stop()		# ミサイル発射音停止
 				$Enemy/AudioExplosion.global_position = epos
-				$Enemy/AudioExplosion.play()		# 敵機爆発音
+				if sound: $Enemy/AudioExplosion.play()		# 敵機爆発音
 				updateScoreLabel()
 				if nEnemies == 0:       # 敵をすべて撃破した場合
 					paused = true
@@ -383,7 +386,7 @@ func _on_enemy_missile_timer_timeout():
 	fireEnemyMissile()
 func _on_ufo_timer_timeout():
 	$UFO.position.x = SCREEN_WIDTH			# UFO出現
-	$UFO/AudioWarning.play()
+	if sound: $UFO/AudioWarning.play()
 func _on_UFOLabelTimer_timeout():
 	$UFOLabel.text = ""						# UFO得点消去
 
@@ -391,3 +394,5 @@ func _on_game_over_dlg_confirmed():
 	restartGame()
 func _on_game_over_dlg_canceled():
 	restartGame()
+func _on_sound_button_toggled(button_pressed):
+	sound = button_pressed

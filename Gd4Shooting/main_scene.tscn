@@ -160,6 +160,22 @@ texture = ExtResource("4_fen7f")
 position = Vector2(165, 680)
 texture = ExtResource("4_fen7f")
 
+[node name="SoundButton" type="CheckButton" parent="FrameLayer"]
+offset_left = 320.0
+offset_top = 660.0
+offset_right = 469.0
+offset_bottom = 716.0
+text = "Sound"
+icon = ExtResource("17_lx8n8")
+
+[node name="FireButton" type="TextureButton" parent="FrameLayer"]
+offset_left = 20.0
+offset_top = 720.0
+offset_right = 84.0
+offset_bottom = 784.0
+texture_normal = ExtResource("7_qg3xw")
+texture_pressed = ExtResource("8_a56ai")
+
 [node name="LeftButton" type="TextureButton" parent="FrameLayer"]
 offset_left = 320.0
 offset_top = 720.0
@@ -175,22 +191,6 @@ offset_right = 464.0
 offset_bottom = 784.0
 texture_normal = ExtResource("6_iqbs6")
 texture_pressed = ExtResource("8_gvjdy")
-
-[node name="FireButton" type="TextureButton" parent="FrameLayer"]
-offset_left = 20.0
-offset_top = 720.0
-offset_right = 84.0
-offset_bottom = 784.0
-texture_normal = ExtResource("7_qg3xw")
-texture_pressed = ExtResource("8_a56ai")
-
-[node name="CheckButton" type="CheckButton" parent="FrameLayer"]
-offset_left = 320.0
-offset_top = 660.0
-offset_right = 469.0
-offset_bottom = 716.0
-text = "Sound"
-icon = ExtResource("17_lx8n8")
 
 [node name="Enemy" type="Node2D" parent="."]
 
@@ -223,11 +223,12 @@ horizontal_alignment = 1
 
 [connection signal="timeout" from="UFO/UFOTimer" to="." method="_on_ufo_timer_timeout"]
 [connection signal="timeout" from="UFOLabel/Timer" to="." method="_on_UFOLabelTimer_timeout"]
+[connection signal="toggled" from="FrameLayer/SoundButton" to="." method="_on_sound_button_toggled"]
+[connection signal="button_down" from="FrameLayer/FireButton" to="." method="_on_fire_button_button_down"]
 [connection signal="button_down" from="FrameLayer/LeftButton" to="." method="_on_left_button_button_down"]
 [connection signal="button_up" from="FrameLayer/LeftButton" to="." method="_on_left_button_button_up"]
 [connection signal="button_down" from="FrameLayer/RightButton" to="." method="_on_right_button_button_down"]
 [connection signal="button_up" from="FrameLayer/RightButton" to="." method="_on_right_button_button_up"]
-[connection signal="button_down" from="FrameLayer/FireButton" to="." method="_on_fire_button_button_down"]
 [connection signal="timeout" from="Enemy/EnemyMoveTimer" to="." method="_on_enemy_move_timer_timeout"]
 [connection signal="timeout" from="Enemy/EnemyMissileTimer" to="." method="_on_enemy_missile_timer_timeout"]
 [connection signal="canceled" from="DlgLayer/GameOverDlg" to="." method="_on_game_over_dlg_canceled"]
