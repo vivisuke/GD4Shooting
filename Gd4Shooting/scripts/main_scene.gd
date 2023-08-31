@@ -148,7 +148,7 @@ func updateLeftFighter():
 	$FrameLayer/NFighter.text = "%d" % nFighter
 	$FrameLayer/ReserveFighter1.set_visible(nFighter>1)
 	$FrameLayer/ReserveFighter2.set_visible(nFighter>2)
-func clearAllMissiles():
+func clearAllEnemyMissiles():		# 敵ミサイル全消去
 	for em in enemyMissiles:
 		if em != null:
 			em.queue_free()
@@ -159,7 +159,7 @@ func explodeFighter():
 	$Fighter/Explosion.restart()
 	if sound: $Fighter/AudioExplosion.play()
 	exploding = true
-	clearAllMissiles();     # 敵ミサイル消去
+	clearAllEnemyMissiles();     # 敵ミサイル全消去
 	dur_expl = 0.0
 	nFighter -= 1
 	if nFighter == 0:       # 自機：０、ゲームオーバー
@@ -168,7 +168,7 @@ func explodeFighter():
 		$DlgLayer/GameOverDlg.dialog_text = "GAME OVER\nTRY AGAIN ?"
 		$DlgLayer/GameOverDlg.popup_centered()
 	updateLeftFighter()
-	#clearAllMissiles()
+	#clearAllEnemyMissiles()
 	if missile != null:
 		missile.queue_free()    # 自機ミサイル消去
 		missile = null
@@ -341,6 +341,9 @@ func _physics_process(delta):
 	if missile != null:     # 自機ミサイル飛翔中
 		processMissile()
 	processEnemyMissiles()      # 敵ミサイル処理
+	if invaded:
+		explodeFighter()
+		invaded = false
 	pass
 
 func _input(event):
@@ -385,6 +388,7 @@ func _on_enemy_move_timer_timeout():
 func _on_enemy_missile_timer_timeout():
 	fireEnemyMissile()
 func _on_ufo_timer_timeout():
+	if gameOver || paused: return
 	$UFO.position.x = SCREEN_WIDTH			# UFO出現
 	if sound: $UFO/AudioWarning.play()
 func _on_UFOLabelTimer_timeout():
