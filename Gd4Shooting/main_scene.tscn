@@ -163,35 +163,57 @@ texture = ExtResource("4_fen7f")
 
 [node name="SoundButton" type="CheckButton" parent="FrameLayer"]
 offset_left = 320.0
-offset_top = 660.0
+offset_top = 650.0
 offset_right = 469.0
-offset_bottom = 716.0
+offset_bottom = 706.0
 text = "Sound"
 icon = ExtResource("17_lx8n8")
 
 [node name="FireButton" type="TextureButton" parent="FrameLayer"]
 offset_left = 20.0
-offset_top = 720.0
+offset_top = 705.0
 offset_right = 84.0
-offset_bottom = 784.0
+offset_bottom = 769.0
 texture_normal = ExtResource("7_qg3xw")
 texture_pressed = ExtResource("8_a56ai")
 
+[node name="Label" type="Label" parent="FrameLayer/FireButton"]
+layout_mode = 0
+offset_top = 61.0
+offset_right = 64.0
+offset_bottom = 87.0
+text = "space"
+horizontal_alignment = 1
+
 [node name="LeftButton" type="TextureButton" parent="FrameLayer"]
 offset_left = 320.0
-offset_top = 720.0
+offset_top = 705.0
 offset_right = 384.0
-offset_bottom = 784.0
+offset_bottom = 769.0
 texture_normal = ExtResource("5_s2j44")
 texture_pressed = ExtResource("6_jlknt")
 
+[node name="Label" type="Label" parent="FrameLayer/LeftButton"]
+offset_top = 61.0
+offset_right = 64.0
+offset_bottom = 87.0
+text = "<-"
+horizontal_alignment = 1
+
 [node name="RightButton" type="TextureButton" parent="FrameLayer"]
 offset_left = 400.0
-offset_top = 720.0
+offset_top = 705.0
 offset_right = 464.0
-offset_bottom = 784.0
+offset_bottom = 769.0
 texture_normal = ExtResource("6_iqbs6")
 texture_pressed = ExtResource("8_gvjdy")
+
+[node name="Label" type="Label" parent="FrameLayer/RightButton"]
+offset_top = 61.0
+offset_right = 64.0
+offset_bottom = 87.0
+text = "->"
+horizontal_alignment = 1
 
 [node name="Enemy" type="Node2D" parent="."]
 
